@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.udacity.asteroidradar.main.MainViewModel" />
+        
+        <variable
+            name="asteroid"
+            type="com.udacity.asteroidradar.Asteroid" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:padding="4dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/asteroid_name_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:padding="2dp"
+                    android:text="@{asteroid.codename}"
+                    android:contentDescription="@{`Asteroid Name: ` + asteroid.codename}"/>
+
+                <TextView
+                    android:id="@+id/asteroid_date_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:text="@{asteroid.closeApproachDate}"
+                    android:contentDescription="@{`Asteroid Close Approach Date: ` + asteroid.closeApproachDate}"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/statusIcon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:padding="2dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_status_normal"
+                app:statusIcon="@{asteroid.potentiallyHazardous}"
+                android:contentDescription="@{asteroid.potentiallyHazardous ? (`This asteroid is potentially hazardous, passing relatively close to earth at ` + Double.toString(asteroid.distanceFromEarth) + ` miles away.`) : (`This asteroid is pretty safe, passing ` + Double.toString(asteroid.distanceFromEarth) + ` miles away from earth.`)}"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
